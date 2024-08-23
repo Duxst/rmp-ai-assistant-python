@@ -1,0 +1,20 @@
+.env
+# Node.js
+node_modules/
+scraper/node_modules/
+
+# Python
+backend/venv/
+backend/__pycache__/
+
+# Sensitive keys
+*.env
+
+# IDE specific
+.vscode/
+*.log
+.DS_Store
+
+# Build files
+frontend/.next/
+frontend/.env.local

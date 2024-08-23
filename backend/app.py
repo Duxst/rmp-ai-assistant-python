@@ -1,7 +1,13 @@
 from fastapi import FastAPI, HTTPException
 import pinecone
+import os
+from dotenv import load_dotenv
 
+# Initialize FastAPI
 app = FastAPI()
+
+# Load environment variables
+load_dotenv()
 
 # Initialize Pinecone
 pinecone_api_key = os.getenv("PINECONE_API_KEY")

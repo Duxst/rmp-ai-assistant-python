@@ -17,7 +17,7 @@ load_dotenv()
 pinecone_api_key = os.getenv("PINECONE_API_KEY")
 pinecone.init(api_key=pinecone_api_key, environment="us-east1-gcp")
 
-# Initialize OpenAI API
+# Initialize OpenAI API key
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Download necessary NLTK data
@@ -25,10 +25,7 @@ nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
 
-lemmatizer = WordNetLemmatizer()
-stop_words = set(stopwords.words('english'))
-
-# Preprocess function
+# Preprocessing function
 def preprocess_review(review_text):
     review_text = review_text.lower()
     review_text = review_text.translate(str.maketrans('', '', string.punctuation))
@@ -37,7 +34,7 @@ def preprocess_review(review_text):
     lemmatized_words = [lemmatizer.lemmatize(word) for word in filtered_words]
     return ' '.join(lemmatized_words).strip()
 
-# Analyze sentiment
+# Sentiment analysis function
 def analyze_sentiment(review_text):
     blob = TextBlob(review_text)
     return blob.sentiment.polarity
@@ -59,7 +56,7 @@ if index_name not in pinecone.list_indexes():
 index = pinecone.Index(index_name)
 
 # Load reviews.json
-with open("../backend/reviews.json", "r") as f:
+with open("reviews.json", "r") as f:
     data = json.load(f)
 
 # Process reviews and embed them
